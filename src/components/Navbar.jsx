@@ -43,10 +43,14 @@ const Navbar = () => {
           {user ? (
 
             <>
+
               {/* User Name */}
-              <p className="text-white font-semibold text-sm sm:text-base break-all">
+              <Link
+                to="/profile"
+                className="text-white font-semibold text-sm sm:text-base hover:text-slate-200 transition-all duration-300"
+              >
                 {user.name}
-              </p>
+              </Link>
 
               {/* Logout */}
               <button
@@ -55,11 +59,13 @@ const Navbar = () => {
               >
                 Logout
               </button>
+
             </>
 
           ) : (
 
             <>
+
               {/* Login */}
               <Link
                 to="/login"
@@ -75,6 +81,7 @@ const Navbar = () => {
               >
                 Signup
               </Link>
+
             </>
 
           )}

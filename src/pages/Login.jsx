@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { supabase } from "../config/supabase/supabase.js";
+
 import { useNavigate, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../redux/userSlice";
 
 const Login = () => {
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -39,6 +44,14 @@ const Login = () => {
         alert(error.message);
         return;
       }
+
+      /* Redux Store */
+      dispatch(
+        loginUser({
+          name: localStorage.getItem("userName"),
+          email: formData.email,
+        })
+      );
 
       alert("Login Successful");
 

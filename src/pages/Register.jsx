@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { supabase } from "../config/supabase/supabase.js";
+
 import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
@@ -7,11 +8,13 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
+
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     repeatPassword: "",
+
   });
 
   const [loading, setLoading] = useState(false);
@@ -25,7 +28,7 @@ const Register = () => {
 
   };
 
-  const handleSignup = async (e) => {
+  const handleRegister = async (e) => {
 
     e.preventDefault();
 
@@ -38,19 +41,27 @@ const Register = () => {
 
       setLoading(true);
 
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
+
         email: formData.email,
         password: formData.password,
+
       });
 
       if (error) {
+
         alert(error.message);
         return;
+
       }
 
-      alert("Signup Successful");
+      /* Save User Name */
+      localStorage.setItem(
+        "userName",
+        `${formData.firstName} ${formData.lastName}`
+      );
 
-      console.log(data);
+      alert("Account Created Successfully");
 
       navigate("/login");
 
@@ -68,6 +79,7 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-slate-100">
 
+      {/* Heading */}
       <div className="max-w-6xl mx-auto px-6 pt-10">
 
         <h1 className="text-5xl font-bold text-slate-800">
@@ -78,12 +90,13 @@ const Register = () => {
 
       </div>
 
+      {/* Form */}
       <div className="flex justify-center items-center mt-16 px-4">
 
         <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 p-10">
 
           <form
-            onSubmit={handleSignup}
+            onSubmit={handleRegister}
             className="space-y-5"
           >
 

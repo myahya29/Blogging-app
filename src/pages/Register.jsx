@@ -1,73 +1,151 @@
-import React from "react";
+import React, { useState } from "react";
+import { supabase } from "../config/supabase/supabase.js";
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
+
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+
+  };
+
+  const handleSignup = async (e) => {
+
+    e.preventDefault();
+
+    if (formData.password !== formData.repeatPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+
+      setLoading(true);
+
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      alert("Signup Successful");
+
+      console.log(data);
+
+      navigate("/login");
+
+    } catch (error) {
+
+      console.log(error);
+
+    } finally {
+
+      setLoading(false);
+
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-100">
 
-      {/* Heading */}
       <div className="max-w-6xl mx-auto px-6 pt-10">
-        
+
         <h1 className="text-5xl font-bold text-slate-800">
           Signup
         </h1>
 
         <div className="w-full h-[1px] bg-slate-300 mt-5"></div>
+
       </div>
 
-      {/* Form */}
       <div className="flex justify-center items-center mt-16 px-4">
 
-        <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-10">
+        <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 p-10">
 
-          <form className="space-y-5">
+          <form
+            onSubmit={handleSignup}
+            className="space-y-5"
+          >
 
             <input
               type="text"
+              name="firstName"
               placeholder="First Name"
-              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-violet-300"
+              onChange={handleChange}
+              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-300"
             />
 
             <input
               type="text"
+              name="lastName"
               placeholder="Last Name"
-              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-violet-300"
+              onChange={handleChange}
+              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-300"
             />
 
             <input
               type="email"
+              name="email"
               placeholder="Email"
-              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-violet-300"
+              onChange={handleChange}
+              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-300"
             />
 
             <input
               type="password"
+              name="password"
               placeholder="Password"
-              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-violet-300"
+              onChange={handleChange}
+              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-300"
             />
 
             <input
               type="password"
+              name="repeatPassword"
               placeholder="Repeat Password"
-              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-violet-300"
+              onChange={handleChange}
+              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-300"
             />
-
-            {/* Upload Image */}
-            <div>
-              <label className="block mb-2 text-slate-700 font-medium">
-                Upload Profile Picture
-              </label>
-
-              <input
-                type="file"
-                className="w-full border border-slate-300 rounded-lg p-2 cursor-pointer"
-              />
-            </div>
 
             <button
-              className="w-full bg-gradient-to-r from-violet-600 to-purple-500 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-blue-700 to-cyan-500 text-white py-3 rounded-lg font-semibold hover:scale-[1.02] transition-all duration-300"
             >
-              Signup
+              {loading ? "Loading..." : "Signup"}
             </button>
+
+            <p className="text-center text-slate-600">
+
+              Already have an account?{" "}
+
+              <Link
+                to="/login"
+                className="text-blue-600 font-semibold"
+              >
+                Login
+              </Link>
+
+            </p>
 
           </form>
 

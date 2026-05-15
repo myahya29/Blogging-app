@@ -69,12 +69,12 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="min-h-screen bg-slate-100 px-4">
 
       {/* Heading */}
-      <div className="max-w-6xl mx-auto px-6 pt-10">
+      <div className="max-w-6xl mx-auto pt-8 sm:pt-10">
 
-        <h1 className="text-5xl font-bold text-slate-800">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-800 text-center sm:text-left">
           Login
         </h1>
 
@@ -83,9 +83,9 @@ const Login = () => {
       </div>
 
       {/* Form */}
-      <div className="flex justify-center items-center mt-20 px-4">
+      <div className="flex justify-center items-center py-10 sm:py-16 md:py-20">
 
-        <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 p-10">
+        <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 sm:p-8 md:p-10">
 
           <form
             onSubmit={handleLogin}
@@ -97,7 +97,7 @@ const Login = () => {
               name="email"
               placeholder="Email"
               onChange={handleChange}
-              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-300"
+              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-base"
             />
 
             <input
@@ -105,17 +105,17 @@ const Login = () => {
               name="password"
               placeholder="Password"
               onChange={handleChange}
-              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-300"
+              className="w-full border border-slate-300 px-4 py-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-300 text-sm sm:text-base"
             />
 
             <button
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-700 to-cyan-500 text-white py-3 rounded-lg font-semibold hover:scale-[1.02] transition-all duration-300"
+              className="w-full bg-gradient-to-r from-blue-700 to-cyan-500 text-white py-3 rounded-lg font-semibold hover:scale-[1.02] transition-all duration-300 text-sm sm:text-base"
             >
               {loading ? "Loading..." : "Login"}
             </button>
 
-            <p className="text-center text-slate-600">
+            <p className="text-center text-slate-600 text-sm sm:text-base">
 
               Don't have an account?{" "}
 

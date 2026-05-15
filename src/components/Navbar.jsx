@@ -27,31 +27,31 @@ const Navbar = () => {
   return (
     <nav className="bg-gradient-to-r from-blue-700 to-cyan-500 shadow-lg">
 
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
 
         {/* Logo */}
         <Link
           to="/"
-          className="text-white text-2xl font-bold tracking-wide"
+          className="text-white text-xl sm:text-2xl font-bold tracking-wide text-center sm:text-left"
         >
           Personal Blogging App
         </Link>
 
         {/* Right Side */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center flex-wrap justify-center gap-3 sm:gap-4">
 
           {user ? (
 
             <>
               {/* User Name */}
-              <p className="text-white font-semibold">
+              <p className="text-white font-semibold text-sm sm:text-base break-all">
                 {user.name}
               </p>
 
               {/* Logout */}
               <button
                 onClick={handleLogout}
-                className="bg-white text-blue-700 px-4 py-2 rounded-lg font-medium hover:bg-slate-100 transition-all duration-300"
+                className="bg-white text-blue-700 px-4 py-2 rounded-lg font-medium hover:bg-slate-100 transition-all duration-300 text-sm sm:text-base"
               >
                 Logout
               </button>
@@ -63,7 +63,7 @@ const Navbar = () => {
               {/* Login */}
               <Link
                 to="/login"
-                className="text-white border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 transition-all duration-300"
+                className="text-white border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 transition-all duration-300 text-sm sm:text-base"
               >
                 Login
               </Link>
@@ -71,7 +71,7 @@ const Navbar = () => {
               {/* Signup */}
               <Link
                 to="/register"
-                className="bg-white text-blue-700 px-4 py-2 rounded-lg font-medium hover:bg-slate-100 transition-all duration-300"
+                className="bg-white text-blue-700 px-4 py-2 rounded-lg font-medium hover:bg-slate-100 transition-all duration-300 text-sm sm:text-base"
               >
                 Signup
               </Link>
